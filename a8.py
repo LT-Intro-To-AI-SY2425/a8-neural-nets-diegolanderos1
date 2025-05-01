@@ -1,14 +1,16 @@
 from neural import *
-
-print("<<<<<<<<<<<<<< XOR >>>>>>>>>>>>>>\n")
+from csv import *
 training_data = [
-    ([0.9, 0.6, 0.8, 0.3, 0.1],[1.0]),
-    ([0.8, 0.8, 0.4, 0.6, 0.4],[1.0]),
-    ([0.7, 0.2, 0.4, 0.6, 0.3],[1.0]),
-    ([0.5, 0.5, 0.8, 0.4, 0.8],[0.0]),
-    ([0.3, 0.1, 0.6, 0.8, 0.8],[0.0]),
-    ([0.6, 0.3, 0.4, 0.3, 0.6],[0.0])
+
 ]
+with open ('Bean.csv', 'r') as file:
+    csvreader = csv.reader(file)
+    header = next(csvreader) # Skip header, if it exists
+    for row in csvreader:
+        # Process each row
+        training_data.append(row)
+print("<<<<<<<<<<<<<< XOR >>>>>>>>>>>>>>\n")
+
 
 politics = NeuralNet(5,6,1)
 politics.train(training_data, learning_rate = 0.7, iters = 10000, print_interval = 1000)
